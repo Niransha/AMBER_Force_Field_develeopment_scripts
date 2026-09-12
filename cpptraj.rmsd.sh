@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=%x
+#SBATCH --job-name=cpprmsd
 #SBATCH -N 1
 #SBATCH -n 20 
 ##SBATCH --gres=gpu:1
@@ -18,20 +18,58 @@
 source /opt/ohpc/pub/apps/rnachem/amber18_gpu/amber.sh
 source /opt/ohpc/pub/apps/rnachem/amber18_gpu/modules2load.txt
 
-rm rmsd*
+rm rmsd*.agr
+rm rmsd*.dat
+rm first.pdb last.pdb
+
+#find $SLURM_SUBMIT_DIR -maxdepth 1 -type f \( -name "slurm-*" ! -name "slurm-$SLURM_JOB_ID.out" \) -delete
 
 cat>input<<EOF
 parm ./strip.prmtop.new
 trajin ./combined_md.mdcrd
 
-symmrmsd ToFirst :1-24&!@H= first out rmsd1.agr mass
 
-rms first out rmsd1.dat
+symmrmsd ToFirstAll1-12 :1-12&!@H= first out rmsd1.agr mass time 0.00002 xlabel "  " 
+symmrmsd ToFirstHairpin5-8 :5-8&!@H= first out rmsd1.agr mass time 0.00002 
+symmrmsd ToFirstStem1-4,9-12 :1-4,8-12&!@H= first out rmsd1.agr mass time 0.00002 
 
-go
+
+symmrmsd ToFirstAll :1-12&!@H= first out rmsdAll.dat mass time 0.00002 
+symmrmsd ToFirstHairpin :5-8&!@H= first out rmsdHairpin.dat mass time 0.00002
+symmrmsd ToFirstStem :1-4,8-12&!@H= first out rmsdStem.dat mass time 0.00002 
+
+
+run
 EOF
 
-#cpptraj -i input
-
 mpirun -n 20 cpptraj.MPI -i input
+
+############################
+
+cat>input2<<EOF
+
+parm ./strip.prmtop.new
+trajin ./combined_md.mdcrd 1 1
+trajout first.pdb pdb
+run
+EOF
+
+cpptraj -i input2
+
+############################
+
+cat>input3<<EOF
+
+parm ./strip.prmtop.new
+trajin ./combined_md.mdcrd lastframe
+trajout last.pdb pdb 
+run
+EOF
+
+
+cpptraj -i input3
+
+
+
+
 

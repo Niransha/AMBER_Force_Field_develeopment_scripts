@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=cpptraj
-##SBATCH -N 1
+#SBATCH -N 1
 #SBATCH -n 16 
 ##SBATCH --gres=gpu:1
-#SBATCH --partition=shortq7
+#SBATCH --partition=shortq7,mediumq7,longq7,shortq7-gpu,longq7-rna
 ##SBATCH --partition=longq7-rna
 ##SBATCH --mail-type=ALL
 #SBATCH --time=6:00:00
-#SBATCH --exclusive
+##SBATCH --exclusive
 ##SBATCH --nodelist=nodegpu025
 
 last=`ls -l ../md_*.mdcrd | awk '{split($9,a,"/"); split(a[2],b,"_"); split(b[2],c,"."); print c[1] }' | sort -nk1 | tail -1`
@@ -28,13 +28,15 @@ for i=1;i<$(($last+1));i++
 
 done
 
-image center familiar
+autoimage
 strip :Cl-
 strip :Na+
 strip :WAT outprefix strip
 trajout combined_md.mdcrd netcdf
 go
 EOF
+
+#image center familiar
 
 cpptraj -i input_combine
 
