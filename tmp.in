@@ -1,0 +1,8 @@
+arrange (1,1,.15,0.6,0.6,ON,ON,ON)
+ FOCUS G0
+ READ NXY "./ol"
+ READ NXY "../dimer_all_hairpins/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_bulges/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_iloops/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_single-strands/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_junctions/outfiles/alpha_UC.dat"

@@ -1,0 +1,10 @@
+run as
+bash testing <parameter_value_file> 
+
+eg 
+
+bash testing.sh v4
+give name for output file
+output 
+
+everyting inside files folder copied here.

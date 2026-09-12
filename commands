@@ -1,137 +1,25 @@
-#!/bin/bash
-#to find unproper minimezed, 
-cat E_MM_zero.dat | sort -nk3,3 |  tail -10 
+#!/bin/sh
+cat v2 | awk '{  pi=4*atan2(1,1); for(i=1; i<=8; i+=2){ val=(i-1)/2+1;  V[val]=$i} for(i=2; i<=8; i+=2){ val=i/2;P[val]=$i;}} END { for(i=0; i<=350; i+=10){ ene=0; for(j=1; j<=4; j++){ print( i,  V[j], P[j] )}; } }'
 
-copy prmtop.zeroed.new to here from 2d_minimiezed. 
+amber location : 
+/programs/amber22/dat/leap/parm
 
-ls -l 2d_*/*/filelines_end  | awk '{split ($9,a,"/"); \
-k="cp /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized/"a[1]"/"a[2]"/prmtop.zeroed /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/"a[1]"/"a[2]"/"  ; system(k) }'
-
-
- ls -l 2d_*/*/test.pdb | awk '{split ($9,a,"/"); k="cp -r 2d_AA/BB5_RA3/gnuplot "a[1]"/"a[2]; print(k)}'
-cp -r 2d_AA/BB5_RA3/gnuplot 2d_AA/BB5_RA3
-cp -r 2d_AA/BB5_RA3/gnuplot 2d_AA/RA5_BB3
-cp -r 2d_AA/BB5_RA3/gnuplot 2d_CC/BB5_RC3
-cp -r 2d_AA/BB5_RA3/gnuplot 2d_CC/RC5_BB3
-cp -r 2d_AA/BB5_RA3/gnuplot 2d_GG/BB5_RG3
-cp -r 2d_AA/BB5_RA3/gnuplot 2d_GG/RG5_BB3
-cp -r 2d_AA/BB5_RA3/gnuplot 2d_UU/BB5_RU3
-cp -r 2d_AA/BB5_RA3/gnuplot 2d_UU/RU5_BB3
-copy parmtop.zeroed from ~/scrach/prmtop.zeroed prmtop.zeroed.new to here
-ls -l 2d_*/*/filelines_end  | awk '{split ($9,a,"/"); \
-k="cp /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized/"a[1]"/"a[2]"/prmtop.zeroed /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/"a[1]"/"a[2]"/"  ; system(k) }'
+> cat  /programs/amber22/dat/leap/parm/frcmod.ROC-RNA | grep BETA | awk '{s++; if($6 <0){v=$6*(-1)}else{v=$6}; if($5 < 0){$5+=360}; l=l $4"*(1+cos("v"*x-"$5")) + "; if(s%4==0){gsub(/\+ $/,",",l)}}END{print l}'
+> 0.215000*(1+cos(4*x-263.4)) + 0.952000*(1+cos(3*x-191.8)) + 0.651000*(1+cos(2*x-129.1)) + 1.246000*(1+cos(1.0*x-151.8)) ,
 
 
+cat frcmod_beta_1Dcomb  | grep revision  | awk '{s++; if($6 <0){v=$6*(-1)}else{v=$6}; if($5 < 0){$5+=360}; l=l $4"*(1+cos("v"*x-"$5")) + "; if(s%4==0){gsub(/\+ $/,",",l)}}END{print l}'
 
-ls -l 2d_*/*/test.pdb | awk '{split ($9,a,"/"); k="cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp "a[1]"/"a[2]"/gnuplot/"; print(k)}'
-cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp 2d_AA/BB5_RA3/gnuplot/
-cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp 2d_AA/RA5_BB3/gnuplot/
-cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp 2d_CC/BB5_RC3/gnuplot/
-cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp 2d_CC/RC5_BB3/gnuplot/
-cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp 2d_GG/BB5_RG3/gnuplot/
-cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp 2d_GG/RG5_BB3/gnuplot/
-cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp 2d_UU/BB5_RU3/gnuplot/
-cp -r 2d_AA/BB5_RA3/gnuplot/gnuplot.gp 2d_UU/RU5_BB3/gnuplot/
+cat frcmod_beta_1Dcomb| grep revision | awk '{s++; if($5 <0){v=$5*(-1)}else{v=$5}; if($4 < 0){$4+=360}; l=l $3"*(1+cos("v"*x-"$4")) + "; if(s%4==0){gsub(/\+ $/,",",l)}}END{print l}'
+
+1*(1+cos(119.974*x-6.03012)) + 1*(1+cos(173.008*x-3.72039)) + 1*(1+cos(93.3288*x-1.5556)) + 1*(1+cos(51.869*x-0.866088)) ,1*(1+cos(150.102*x-5.5418)) + 1*(1+cos(142.745*x-3.48473)) + 1*(1+cos(49.2949*x-2.35404)) + 1*(1+cos(10.892*x-0.882608)) ,1*(1+cos(133.855*x-5.75577)) + 1*(1+cos(169.279*x-3.39376)) + 1*(1+cos(73.5417*x-1.77715)) + 1*(1+cos(38.7143*x-0.938581)) ,1*(1+cos(153.051*x-5.29484)) + 1*(1+cos(141.368*x-3.4796)) + 1*(1+cos(46.6863*x-2.45096)) + 1*(1+cos(4.91153*x-0.804335)) ,1*(1+cos(149.725*x-5.58757)) + 1*(1+cos(143.328*x-3.37767)) + 1*(1+cos(49.3832*x-2.27608)) + 1*(1+cos(14.4327*x-0.886545)) ,1*(1+cos(145.279*x-5.68897)) + 1*(1+cos(148.991*x-3.62183)) + 1*(1+cos(54.2837*x-2.3182)) + 1*(1+cos(19.4588*x-0.866025)) ,1*(1+cos(157.493*x-5.45605)) + 1*(1+cos(136.48*x-3.54694)) + 1*(1+cos(44.6787*x-2.58699)) + 1*(1+cos(4.74976*x-0.879816)) ,1*(1+cos(132.111*x-5.94324)) + 1*(1+cos(170.64*x-3.68383)) + 1*(1+cos(78.8845*x-1.96986)) + 1*(1+cos(39.0969*x-1.07208)) ,1*(1+cos(158.848*x-5.59058)) + 1*(1+cos(132.66*x-3.60127)) + 1*(1+cos(41.5285*x-2.61498)) + 1*(1+cos(2.05615*x-0.861438)) ,1*(1+cos(133.993*x-6.00482)) + 1*(1+cos(168.74*x-3.728)) + 1*(1+cos(77.9831*x-2.02163)) + 1*(1+cos(40.3344*x-1.10516)) ,1*(1+cos(138.095*x-5.57193)) + 1*(1+cos(165.251*x-3.34939)) + 1*(1+cos(69.1205*x-1.88522)) + 1*(1+cos(34.6314*x-0.933209)) ,1*(1+cos(138.449*x-5.15251)) + 1*(1+cos(168.156*x-2.518)) + 1*(1+cos(63.5958*x-1.20509)) + 1*(1+cos(40.9765*x-0.690779)) ,1*(1+cos(153.674*x-5.41165)) + 1*(1+cos(138.412*x-3.49872)) + 1*(1+cos(43.9306*x-2.44573)) + 1*(1+cos(2.94345*x-0.777937)) ,1*(1+cos(147.598*x-5.57465)) + 1*(1+cos(145.924*x-3.65178)) + 1*(1+cos(51.4014*x-2.39243)) + 1*(1+cos(13.0608*x-0.833657)) ,1*(1+cos(178.008*x-6.24994)) + 1*(1+cos(109.103*x-3.55057)) + 1*(1+cos(30.6089*x-2.58166)) + 1*(1+cos(2.92859*x-0.918723)) ,1*(1+cos(118.032*x-6.26793)) + 1*(1+cos(171.416*x-3.803)) + 1*(1+cos(97.5932*x-1.53421)) + 1*(1+cos(54.5109*x-0.894563)) ,
 
 
-
-ls -l 2d_*/*/test.pdb | awk '{split ($9,a,"/"); k="scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/"a[1]"/"a[2]"/*.dat ./"a[1]"/"a[2]"/gnuplot/" ; print(k)}'
-
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/2d_AA/BB5_RA3/*.dat ./2d_AA/BB5_RA3/gnuplot/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/2d_AA/RA5_BB3/*.dat ./2d_AA/RA5_BB3/gnuplot/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/2d_CC/BB5_RC3/*.dat ./2d_CC/BB5_RC3/gnuplot/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/2d_CC/RC5_BB3/*.dat ./2d_CC/RC5_BB3/gnuplot/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/2d_GG/BB5_RG3/*.dat ./2d_GG/BB5_RG3/gnuplot/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/2d_GG/RG5_BB3/*.dat ./2d_GG/RG5_BB3/gnuplot/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/2d_UU/BB5_RU3/*.dat ./2d_UU/BB5_RU3/gnuplot/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/2d_UU/RU5_BB3/*.dat ./2d_UU/RU5_BB3/gnuplot/
-
-ls -l 2d_*/*/test.pdb | awk '{split ($9,a,"/"); k="scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/"a[1]"/"a[2]"/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/" ; print(k)}'
-
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/2d_AA/BB5_RA3/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/2d_AA/RA5_BB3/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/2d_CC/BB5_RC3/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/2d_CC/RC5_BB3/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/2d_GG/BB5_RG3/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/2d_GG/RG5_BB3/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/2d_UU/BB5_RU3/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/
-scp nkumarachchi2019@koko-login.hpc.fau.edu:/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/2d_UU/RU5_BB3/alfa_gamma_all_in_one/*.pdb ./optimized_pdbs/
-
-
-ls -l 2d_??/*/alfa_gamma_all_in_one/*/opt.xyz | awk '{split($9,a,"/"); print a[1]"/"a[2]"/"a[3]"/"a[4]}' > all_paths
-
-
-cat all_paths | awk '{print("cd "$1 "; perl /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_10K/scripts3_2d/create_init_md.pl; cd ../../../../")}'
-
-#extract combine pbds
-ls -l *.g_120/min.pdb | awk '{split($9,a,"/");  split(a[1],b,"."); split(b[1],c,"_"); print c[2]"\t"$9}' | sort -nk1,1 | awk '{s++; print "MODEL "s; system("cat "$2" | grep ATOM"); print "ENDMDL"}' > tmp1.pdb
-ls -l ./a_*.g_120/test.pdb | awk '{split($9,a,"/"); split(a[2],b,"."); split(b[1],c,"_"); print c[2]"\t"$NF}' | sort -nk1,1  | awk '{s++; print "MODEL "s; system("cat "$2"|  grep HETATM");  print "ENDMDL"}'  >  all_pdb_rotation.pdb
-
-
-cat all_paths | awk '{k="cd "$1"; sbatch ../../../../atlas.cpu.min.sh; cd ../../../../"; system(k)}'
-
-jb | grep sand_min | awk '{print "scancel " $1}' > jobs.cancel && bash jobs.cancel
-
-######################### 1D stuff ##############################################################
-
-
-
-diff dimer_UA/rotation_alfa/angle_10/pes.com /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_UA/qm_hf_mp2_631g/rotation_alfa/angle_10/pes.com
-
-###$$$$$$dont use these see bottom with  &&
-##ls -l ./dimer_*/rotation_alfa/angle_*/pes.log  | wc 
-##ls -d ./dimer_*/rotation_alfa/angle_10 | wc
-##find . -print | grep -i opt.xyz > paths
-##sed -i 's/..//' paths
-##sed -i 's/alfa/alfa/g'
-##cat paths
-##cat paths | awk '{split($1,a,"/") ; k="cd "a[1]"; ../extract_single_structure.sh; cd .."; print k}'
-##cat paths | awk '{split($1,a,"/") ; k="cd "a[1]"; ../extract_single_structure.sh; cd .."; s++; if(s%8==0) {print k ; system(k)}}'
-
-cat  E_QM-MM_zero.txt | awk '{print($2)}' > QM-MM_notor.txt
-
-sed -n '/FINAL RESULTS/,$p' */min2.out | grep "Torsion" */min2.out
-
-
-ls -l ./angle_*/md.out | wc 
-
-ls -l ./dimer_*/rotation_alfa/angle_*/opt.xyz | awk '{split($9,a,"/"); print($9)}' > all_paths && sed -i 's/..//' all_paths
-
-ls -l ./dimer_*/rotation_alfa/angle_*/md.out | wc
-
-ls -l ./dimer_*/rotation_alfa/E_MM_zero_??_alfa.txt | wc
-
-sed -n '/FINAL RESULTS/,$p' */min2.out | grep "Torsion" */min2.out | wc
-
-a=`pwd | awk '{split($1,a,"/") ; print (a[7])}'` 
-
-dimer=`pwd | awk '{split($1,a,"/") ; print (a[7])}' | awk '{split($a[7],b,"_"); print (b[2])}'`
-
-tor=`pwd | awk '{split($1,a,"/") ; print (a[8])}' | awk '{split($a[8],b,"_"); print (b[2])}'`
-
-xmgrace ./dimer_C?/rotation_alfa/E_MM_zero_refpoint_zero_??_alfa.txt
-xmgrace ./dimer_??/rotation_alfa/E_QM_refpoint_zero_??_alfa.txt
-
-xmgrace ./dimer_??/rotation_alfa/E_QM_refpoint_zero_??_alfa.txt
-xmgrace ./dimer_??/rotation_alfa/E_MM_zero_refpoint_zero_??_alfa.txt
-xmgrace ./dimer_??/rotation_alfa/E_MM_zero_refpoint_zero_??_alfa.txt
-
-
-
-
-ls -l ./dimer_CC/rotation_alfa/angle_*/md.out | awk '{s=split($9,a,"/"); split(a[s-1],b,"_"); \
- angle=b[2]; k="grep Etot "$9; l=""; k|getline l; close(k); print angle"\t"l}' | sort -nk1,1 > tmp.mm
-
-
-
-# mv folders greater than 360 
-
-ls -ltrd * | awk ' {split($9,a,"."); split(a[1],b,"_"); if(b[2]>360) {c=b[2]-360; print("mv "$9" z_"c"."a[2])} else {print ("mv "$9" "a[1]"."a[2])} }'
-
-mv z_610.g_260 z_250.g_260
-mv z_640.g_0 z_280.g_0
-mv z_630.g_150 z_270.g_150
-mv z_640.g_180 z_280.g_180
-
-
-awk 'NR>1{$3=$2-p} {p=$2} 1'
+#bor beta
+grep -r "\-CI\-OS\-X" *
+frcmod.parmbsc0:X -CI-OS-X     3       1.150       0.0         3.0
+frcmod.shaw:X -CI-OR-X    3    1.150         0.0             3.         based on X -CI-OS-X
+parm10.dat:X -CI-OS-X    3    1.150         0.0             3.
+parm14ipq.dat:X -CI-OS-X    1     0.38333    0.0  3.0  
+parm15ipq_10.3.dat:X -CI-OS-X    1     0.38333    0.0  3.0  
+parm19.dat:X -CI-OS-X    3    1.150         0.0             3.

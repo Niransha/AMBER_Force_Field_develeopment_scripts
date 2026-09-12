@@ -1,0 +1,5 @@
+PRINT TO "fig.png"
+PRINT TO "fig.png"
+xaxis  tick minor linewidth 2
+yaxis  label "Energy (kcal/mol)"
+PAGE SIZE 2560, 2048

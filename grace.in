@@ -1,0 +1,38 @@
+arrange (1,1,.15,0.6,0.6,ON,ON,ON)
+ FOCUS G0
+ READ NXY "../1dcombine_torsio/alfa_1D_comb_tor_all.agr"
+
+ #hides the NXY graph
+ S16  line color 1
+ S16  legend "AAA"
+ AUTOSCALE
+
+yaxis  label "Energy (kcal/mol)"	
+yaxis  tick minor ticks 3
+yaxis  bar linewidth 2.0
+yaxis  tick major linewidth 2
+yaxis  tick minor linewidth 2
+
+xaxis  label "torsion alfa (\c0\C)"	
+xaxis  tick major 60
+xaxis  tick minor ticks 3
+xaxis  bar linewidth 2.0
+xaxis  tick major linewidth 2
+xaxis  tick minor linewidth 2
+
+legend 1.05, 0.8
+legend box linewidth 2
+
+PRINT TO "fig.png"
+HARDCOPY DEVICE "PNG"
+PAGE SIZE 2560, 2048
+#PAGE SIZE 800, 600
+DEVICE "PNG" FONT ANTIALIASING on
+DEVICE "PNG" OP "transparent:off"
+DEVICE "PNG" OP "compression:9"
+PRINT
+
+
+
+
+

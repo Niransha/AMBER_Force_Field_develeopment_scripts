@@ -19,7 +19,7 @@ awk '{ \
   for(i=0; i<=350; i+=10){ \
     ene=0; \
     for(j=1; j<=4; j++){ \
-      ene += V[j]*(1+cos((j*i - P[j])/180*pi)) \
+      ene += V[j]*(1+cos((3*i - P[j])/180*pi)) \
     }; \
     print i"\t"ene \
   } \
@@ -34,6 +34,3 @@ cat plot_data.dat | awk -v ref=$min_epsi '{print $1"\t"$2-ref}' > $outname1\_ref
 echo  plot $outname1\_ref_zero_plot_data.dat 
 
 xmgrace $outname1\_ref_zero_plot_data.dat &
-
-
-
