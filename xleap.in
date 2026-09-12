@@ -1,0 +1,23 @@
+source oldff/leaprc.rna.ff99
+addAtomTypes {
+  { "DH"  "H" "sp3" }
+  { "C1"  "C" "sp2" }
+  { "C2"  "C" "sp2" }
+  { "C3"  "C" "sp2" }
+  { "C4"  "C" "sp2" }
+  { "C5"  "C" "sp2" }
+  { "C6"  "C" "sp2" }
+  { "CI"  "C" "sp3" }
+  { "OZ"  "O" "sp3" }
+}
+
+loadamberparams /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized/scripts3_2d/lib_bb5_bb3_zeroed/frcmod.zeroed
+loadoff         /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized/scripts3_2d/lib_bb5_bb3_zeroed/RNA_CI.lib
+loadoff         /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized/scripts3_2d/lib_bb5_bb3_zeroed/bb3.off
+loadoff         /mnt/rna/home/nkumarachchi2019/scratch/2d_minimized/scripts3_2d/lib_bb5_bb3_zeroed/bb5.off
+
+model = loadpdb model.pdb
+##savepdb model init.xleap.pdb
+saveamberparm model prmtop.zeroed inpcrd.zeroed
+quit
+

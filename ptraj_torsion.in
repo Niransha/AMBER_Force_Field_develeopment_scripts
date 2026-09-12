@@ -1,0 +1,6 @@
+trajin opt.xyz
+dihedral epsilon out e.txt :1@C4' :1@C3' :1@O3' :2@P    
+dihedral zeta    out z.txt :1@C3' :1@O3' :2@P    :2@O5' 
+dihedral alfa    out a.txt :1@O3' :2@P    :2@O5' :2@C5' 
+dihedral beta    out b.txt :2@P    :2@O5' :2@C5' :2@C4' 
+dihedral gamma   out g.txt :2@O5' :2@C5' :2@C4' :2@C3' 

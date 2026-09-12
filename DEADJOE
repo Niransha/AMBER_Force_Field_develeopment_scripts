@@ -1,0 +1,50 @@
+
+*** These modified files were found in JOE when it aborted on Fri Dec  4 00:18:18 2020
+*** JOE was aborted by UNIX signal 15
+
+*** File '(Unnamed)'
+$resname[1]
+$resname[$count]
+\n  
+ 
+ 
+prmtop
+./
+E_MM-MM_zero_refpoint_zero.txt
+RA5
+RA3
+
+*** File '(Unnamed)'
+E_QM-MM_zero_refpoint_zero.txt
+\n\n
+5AA
+AA3
+\n\n
+Torsion
+Iteration Nr
+Conv
+Iteration
+MP2
+
+*** File '(Unnamed)'
+frcmod_dev
+folder_go_in.sh
+folder_go_in.sh
+folder_go_in.sh
+submit_all_jobs
+submit_all_jobs_540.sh
+submit_all_jobs_540.sh
+submit_all_jobs_540.sh
+folder_go_in.sh
+folder_go_in.sh
+folder_go_in.sh
+folder_go_in.sh
+
+*** File '* Startup Log *'
+Processing '/etc/joe/joerc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/joerc
+
+*** These modified files were found in JOE when it aborted on Mon Oct  3 16:26:14 2022
+*** JOE was aborted because the terminal closed

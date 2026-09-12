@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_AA/qm_hf_mp2_631g/rotation_beta ./dimer_AA/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_AC/qm_hf_mp2_631g/rotation_beta ./dimer_AC/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_AG/qm_hf_mp2_631g/rotation_beta ./dimer_AG/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_AU/qm_hf_mp2_631g/rotation_beta ./dimer_AU/
+
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_CC/qm_hf_mp2_631g/rotation_beta ./dimer_CC/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_CA/qm_hf_mp2_631g/rotation_beta ./dimer_CA/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_CG/qm_hf_mp2_631g/rotation_beta ./dimer_CG/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_CU/qm_hf_mp2_631g/rotation_beta ./dimer_CU/
+
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_GA/qm_hf_mp2_631g/rotation_beta ./dimer_GA/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_GC/qm_hf_mp2_631g/rotation_beta ./dimer_GC/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_GG/qm_hf_mp2_631g/rotation_beta ./dimer_GG/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_GU/qm_hf_mp2_631g/rotation_beta ./dimer_GU/
+
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_UA/qm_hf_mp2_631g/rotation_beta ./dimer_UA/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_UC/qm_hf_mp2_631g/rotation_beta ./dimer_UC/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_UG/qm_hf_mp2_631g/rotation_beta ./dimer_UG/
+cp -r /home/nkumarachchi2019/dimeric_force_field/qm_calcs/dimer_UU/qm_hf_mp2_631g/rotation_beta ./dimer_UU/

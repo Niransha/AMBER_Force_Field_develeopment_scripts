@@ -1,0 +1,29 @@
+1. check pes.log file with qm folder
+2. run Run extraxt_single)structure.sh to get optimized initial scordinate opt.xyz
+3. folder_go_in.sh to remove all files except opt.xyz and pes.log file
+4. CC.pdb half (single strain) version copied from Test/all_demers/AA/new_model*
+5. Then xleap.in with zeroed library
+6. create prmtop.zeroed.new using create_correct_prmtop.pl
+7. Run create_init_md.pl inside angle_0 folder and to get runmin and RST files, 
+(this will run run.min and md also) >> min1.out min2.out md.out /// use submit_all_jobs.sh // see comand file
+9. check for torsions 0.002-0.005
+
+8. 
+qm profile 
+
+grep EUMP2 angle_*/pes.log | awk '{cf=627.509; split($1,a,"/"); split(a[1],b,"_"); angle=b[2]; split($NF,a,"D"); v1=a[1]; v2=a[2]; gsub(/\+/,"",v2); energy=sprintf("%.6f", v1*10^v2*cf); print angle"\t"energy}' |  sort -nk1,1 > qm_tmp4
+
+mm profile
+
+grep Etot angle_*/md.out  | awk '{split($1,a,"/"); split(a[1],b,"_"); print b[2]"\t"$4}' | sort -nk1,1  > mm_tmp3
+
+9. 
+parameters :
+create_parms.sh ( Mat_A , linear_least_square_fit.pl )
+
+cat  E_QM-MM_zero.txt | awk '{print($2)}' > QM-MM_notor.txt
+
+
+paste tmp.mm E_MM_zero.txt = same
+
+beta minimization is running
