@@ -1,0 +1,6 @@
+#!bin/bash
+# run this code to make RCSB to amber and then to NAB type pdb
+# RCSB_modifier.sh  
+
+# this will change the resnames to 5AC CGC CG3 version
+# resname_changer_for_RNA_Duplex_for_new_ff.sh
