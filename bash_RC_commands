@@ -1,0 +1,6 @@
+alias koko="ssh -XY nkumarachchi2019@koko-login.hpc.fau.edu"
+alias jb="squeue | grep nku"
+alias gpu="squeue | grep 021 && squeue | grep 022 && squeue | grep 023 && squeue | grep 024 && squeue | grep 025"
+alias showid="scontrol show job"
+alias ff="find . -print | grep -i"
+alias his="history | grep" 

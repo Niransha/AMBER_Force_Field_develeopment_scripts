@@ -1,0 +1,134 @@
+# .bashrc
+force_color_prompt=yes
+alias ls='ls --color=auto' 
+#module load tree-1.8.0-gcc-9.2.0-wxd4j2c
+
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+#
+cluster_name=`uname -a | awk '{split($2,a,"-"); print a[1]}'`
+# User specific aliases and functions
+#module load gcc slurm
+#module load perl-5.30.3-gcc-9.2.0-7llxeq4
+#module load PDL/2.018
+
+if [[ $cluster_name == "koko" ]]; then
+  module load vmd
+elif [[ $cluster_name == "rocky" ]]; then
+#	source /mnt/rna/home/programs/amber22/amber22_athene.sh
+	source /mnt/rna/home/programs/amber22/amber.sh
+fi
+#
+
+alias koko="ssh -XY nkumarachchi2019@koko-login.hpc.fau.edu"
+alias jb="squeue | grep nku"
+alias jbr="jb | grep R"
+alias gpu="squeue | grep 021 && squeue | grep 022 && squeue | grep 023 && squeue | grep 024 && squeue | grep 025"
+alias showid="scontrol show job"
+alias ff="find . -print | grep -i"
+alias his="history | grep" 
+alias pc='ssh nkumarachchi2019@malatya.fau.edu'
+alias pc2='ssh nkumarachchi2019@adana.fau.edu'
+
+alias availnodes="bash /mnt/rna/home/group_scripts_software/useful_scripts/available_resources.sh"
+alias availhpc="perl /mnt/rna/home/group_scripts_software/useful_scripts/check.userjobs.pl"
+
+alias c="cd ../"
+alias cc="cd ../../"
+alias ccc="cd ../../../"
+alias cccc="cd ../../../../"
+alias ccccc="cd ../../../../../"
+alias jbdp="squeue -u $USER -S S,i,M -o \"%12i %15j %4t %30E\""
+
+alias cprm="parmed -i /mnt/rna/home/nkumarachchi2019/Tutorial/scripts/parmed_notes/parmed_commands -p ./strip.prmtop.new -e"
+alias xmgrace="xmgrace -maxpath 1000000"
+alias xmg="xmgrace "
+alias l="ls -ltr"
+alias lh="ls -ltrh"
+alias space="du -h --max-depth=1"
+alias space0="du -h --max-depth=0"
+alias vmdcomb="vmd -parm7 strip.prmtop.new -netcdf combined_md.mdcrd"
+alias algvmdcomb="vmdcomb -e ../../../scripts/rmsd_align_trajec_vmd.tcl"  
+alias vmdfl="vmd -m first.pdb last.pdb -e ../../../scripts/first_n_last_colour_change.tcl"
+alias lldamber="source /mnt/rna/home/programs/amber22/amber22_athene.sh"
+alias changegrp1="chown :gpu-rnachem"
+alias changegrp2="chmod 751"
+alias t="cd /mnt/rna2/project_tetraloop/"
+alias changeauth="chown :gpu-rnachem * && chmod 751 * "
+
+
+#
+#
+export PATH=$PATH:./
+#
+# RNACHEM Group Scripts
+#
+export RNACHEM="/opt/ohpc/pub/apps/rnachem/group_files/scripts"
+export PATH=$PATH:$RNACHEM
+
+
+#source /opt/ohpc/pub/apps/rnachem/amber18_gpu/modules2load.txt
+#source /opt/ohpc/pub/apps/rnachem/amber18_gpu/amber.sh
+if [[ $cluster_name == "koko" ]]; then
+  source /mnt/rna/home/programs/amber22/amber.sh
+fi
+
+
+
+HISTSIZE=10000
+HISTFILESIZE=10000
+
+#
+# Local Perl 5.32.0
+#
+export LOCALPERL=/mnt/rna/home/nkumarachchi2019/scratch/2d_minimized_c1c2/fitting_AC/combined/localperl
+export PATH=$LOCALPERL/bin:$PATH
+export LD_LIBRARY_PATH=$LOCALPERL/lib:$LD_LIBRARY_PATH
+export MANPATH=$LOCALPERL/man:$MANPATH
+
+export X3DNA="/mnt/rna/home/programs/x3dna-v2.3"
+export PATH=$X3DNA/bin:$PATH
+
+#export MBULD="/mnt/rna/home/nkumarachchi2019/.local/bin"
+#export PATH=$MBUILD/bin:$PATH
+export PATH="/mnt/rna/home/nkumarachchi2019/.local/bin:$PATH"
+
+export PATH="/mnt/rna/home/nkumarachchi2019/scratch/msmbuilder2022:$PATH"
+
+
+if [[ $cluster_name == "koko" ]]; then
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/opt/ohpc/pub/utils/anaconda/3/2019.03/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/opt/ohpc/pub/utils/anaconda/3/2019.03/etc/profile.d/conda.sh" ]; then
+          . "/opt/ohpc/pub/utils/anaconda/3/2019.03/etc/profile.d/conda.sh"
+      else
+          export PATH="/opt/ohpc/pub/utils/anaconda/3/2019.03/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+  
+  PATH=~/path/to/anaconda:$PATH
+  
+  export PATH="/opt/ohpc/pub/spack/opt/spack/linux-centos7-x86_64/gcc-8.3.0/graphviz-2.42.2-fbe7sj53xmlurnowfeeybbwtipwpenn2/bin:$PATH"
+fi
+
+###########################33
+#export LD_LIBRARY_PATH=~/.conda/envs/intelpy-env/lib:$LD_LIBRARY_PATH
+
+#/opt/ohpc/pub/utils/anaconda/3/4.4.0/lib/libstdc++.so.6
+#/opt/ohpc/pub/utils/anaconda/3/2019.03/lib/libstdc++.so.6
+
+
+#export LD_LIBRARY_PATH=~/.conda/envs/myenv/lib:$LD_LIBRARY_PATH
+
+#export PATH="/opt/ohpc/pub/utils/anaconda/3/2019.03/:$PATH"
+
+#@export LD_LIBRARY_PATH=~/opt/ohpc/pub/utils/anaconda/3/2019.03/lib/:$LD_LIBRARY_PATH

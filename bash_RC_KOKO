@@ -1,0 +1,25 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# User specific aliases and functions
+module load gcc
+module load slurm 
+
+alias koko="ssh -XY nkumarachchi2019@koko-login.hpc.fau.edu"
+alias jb="squeue | grep nku"
+alias gpu="squeue | grep 021 && squeue | grep 022 && squeue | grep 023 && squeue | grep 024 && squeue | grep 025"
+alias showid="scontrol show job"
+#
+# RNACHEM Group Scripts
+#
+export RNACHEM="/opt/ohpc/pub/apps/rnachem/group_files/scripts"
+export PATH=$PATH:$RNACHEM
+
+
+HISTSIZE=10000
+HISTFILESIZE=10000
+

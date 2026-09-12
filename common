@@ -1,0 +1,72 @@
+#!/bin/bash
+
+
+pdb format 
+
+    awk '{printf "%4s%7.0f%3s%6s%2s%4.0f%12.3f%8.3f%8.3f%6.2f%7.2f\n", $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11}' < xxx.pdb >> new.pdb
+
+paste model.pdb temp_atom_name_format |  awk '{printf "%4s%7.0f%5s%4s%2s%4.0f%12.3f%8.3f%8.3f%6.2f%7.2f\n", $1, $2, $13, $4, $5, $6, $7, $8, $9, $10, $11}'  > edited.pdb
+
+vmd -parm7 name.prmtop -netcdf md_50.mdcrd
+
+#extract title and abstract from RIS file ..
+sed -e "s/T1/Title/g" -e "s/N2/abstract/g" -e '1~1G' new.ris
+
+
+#frcmod file alignment
+nkumarachchi2019@malatya:/media/EXT1_MALATYA/2d_minimized_c1c2$ paste gmma_names gamma_p | awk '{printf "%0s   %0s    %-9s%9s %9s    %0s %0s %0s %0s %0s %0s %0s %0s %0s %0s %0s %0s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17, $18}' > gamma_ok
+
+nkumarachchi2019@malatya:/media/EXT1_MALATYA/2d_minimized_c1c2$ paste alfa_naming alfa_p | awk '{printf "%0s %0s   %0s    %-9s%9s %9s    %0s %0s %0s %0s %0s %0s %0s %0s %0s %0s %0s %0s\n",$1,$2,$3,$19,$20,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18}' > alfa_ok
+
+#cancel jobs hpc
+
+jb | grep sand_min | awk '{print "scancel " $1}' > jobs.cancel && bash jobs.cancel
+
+#awk command
+awk '{ for(f=3; f<=NF; f++) { if ($f < 0) $f=($f+360); } print env_var, $3, $4, $5, $6, $7, $8, $9}' data.dat
+
+#making folders
+mkdir 2d_AA 2d_CC 2d_GG 2d_UU && mkdir 2d_AA/BB5_RA3 && mkdir 2d_AA/RA5_BB3 && mkdir 2d_CC/BB5_RC3 && mkdir 2d_CC/RC5_BB3 && mkdir 2d_GG/BB5_RG3 && mkdir 2d_GG/RG5_BB3 && mkdir 2d_UU/BB5_RU3
+
+
+#mkdir frcmod V and P replace 
+
+cat frcmod_beta_1Dcomb | grep "^P" |  awk '{s++; if(s%4==1) { gsub($4,"-2.59786"); gsub($5,"0.0"); print $0 } else if(s%4==2) { gsub($4,"0.0110707"); gsub($5,"0.0"); print $0 }  else if(s%4==3) { gsub($4,"-0.321846"); gsub($5,"0.0"); print $0 }  else if(s%4==0) { gsub($4,"-0.0817044"); gsub($5,"0.0"); print $0 } }' > 2012_beta_frcmod
+
+
+#A 100 nodes
+#SBATCH --exclude=nodeamd[039-041],nodegpu[002-003]									
+
+# VMD - atom numbers from atom types selection
+ vmd script
+ #A and G
+ set i 4
+set atom1 [atomselect top "(resid $i) and (name O4') "]
+set atom2 [atomselect top "(resid $i) and (name C1') "]
+set atom3 [atomselect top "(resid $i) and (name N9) "]
+set atom4 [atomselect top "(resid $i) and (name C4) "] ; # C2 for C and U
+  
+ set atoms_four_index_list [concat [$atom1 get serial] [$atom2 get serial] [$atom3 get serial] [$atom4 get serial] ]
+
+#C and U
+set i 4
+set atom1 [atomselect top "(resid $i) and (type O4') "]
+ set atom2 [atomselect top "(resid $i) and (type C1') "]
+  set atom3 [atomselect top "(resid $i) and (type N1) "]
+  set atom4 [atomselect top "(resid $i) and (type C2) "] ; # C2 for C and U
+  
+ set atoms_four_index_list [concat [$atom1 get serial] [$atom2 get serial] [$atom3 get serial] [$atom4 get serial] ]
+
+# 
+
+
+#rmds of two column
+
+cat ENERGY_DATA_dev.txt | grep -v DIM | awk '{s++; sum+=($2-$3)^2; print(s" "sum)}END{print sqrt(sum/16)}'
+
+
+
+find . -type f -name "*.chk" -exec rm -f {} \;
+
+
+ 

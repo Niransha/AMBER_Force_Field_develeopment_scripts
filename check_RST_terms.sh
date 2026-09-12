@@ -34,15 +34,7 @@ awk '{ \
       l2 = l2 b[5]" "b[4]" "b[3]" "; \
     }; \
     gsub(/ $/,"",l2); \
-    print l1 " | " l2  ; \
-        
-    {if ($l1 == $l2) print "EQUAL" ; \
-    else print "NOT equal"} 
- 
-    
-      
-    
+    print l1 " | " l2; \
   } \
 }'
-
 

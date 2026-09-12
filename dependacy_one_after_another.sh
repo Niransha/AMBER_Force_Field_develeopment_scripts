@@ -8,9 +8,7 @@
 #r m jobs.txt
 
 # submit the fist job here 
-file=atlas.gpu_only_prodction.sh
-
-jb1=$(sbatch $file)
+jb1=$(sbatch koko.cpu.g09.init_epsilon_rot.sh)
 id1=`echo $jb1 | awk '{print $4}'`
 
 echo  " first job $id1 "
@@ -18,7 +16,7 @@ echo  " first job $id1 "
 
 ##################################################
 # second job when for loop is 2
-for (( i=2; i<=27; i++ ))    #begin with 2 here for easy naming 
+for (( i=2; i<=100; i++ ))    #begin with 2 here for easy naming 
 do 
 
 if [[ $i == 2 ]];
@@ -26,7 +24,7 @@ then
 
 
 nid=$id1
-jobsub=$(sbatch --dependency=afterany:$nid $file)
+jobsub=$(sbatch --dependency=afterany:$nid koko.cpu.g09.init_epsilon_rot.sh)
 nid=`echo $jobsub | awk '{print $4}'`
 
 echo " second job $nid depends on $id1 #####"
@@ -41,7 +39,7 @@ else
 nbefore=$nid
 
 nid=$nid
-jobsub=$(sbatch --dependency=afterany:$nid $file)
+jobsub=$(sbatch --dependency=afterany:$nid koko.cpu.g09.init_epsilon_rot.sh)
 nid=`echo $jobsub | awk '{print $4}'`
 
 nafter=$nid

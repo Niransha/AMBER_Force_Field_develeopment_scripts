@@ -1,0 +1,1 @@
+while : ; do  ls -ltr; sleep 1; echo "Press [CTRL+C] to stop..";  done

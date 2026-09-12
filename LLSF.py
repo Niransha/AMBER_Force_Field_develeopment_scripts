@@ -28,7 +28,7 @@ def sin_f(a):
   #print(cos_f(d), sin_f(d), cos_f(2*d), sin_f(2*d), cos_f(3*d), sin_f(3*d), cos_f(4*d), sin_f(4*d),1 ) 
 
 m=[]
-for d in range (10,361,10):
+for d in range (0,360,10):
   x= [cos_f(d), sin_f(d), cos_f(2*d), sin_f(2*d), cos_f(3*d), sin_f(3*d), cos_f(4*d), sin_f(4*d),1 ]
   m.append(x)
 
@@ -52,10 +52,10 @@ print("pMat_A=", pMat_A)
 #/content/drive/My Drive/RES/dimeric_force_field/cp_mm_calcs/mm_zeroed/dimer_CC/rotation_alfa/E_QM-MM_zero_refpoint_zero.txt
 
 y=[]
-with open("/home/nkumarachchi2019/dimeric_force_field/cp_mm_calcs/mm_zeroed/dimer_CC/rotation_gamma/QM-MM_notor.txt", "r") as file1:
+with open("/home/nkumarachchi2019/dimeric_force_field/cp_mm_calcs/mm_zeroed/dimer_CC/rotation_alfa/fitting_data/nk/QM-MM_notor.txt", "r") as file1:
     for line1 in file1:
         #print(line1.split()[1])
-        y.append(line1.split()[0])    # [1] column 2
+        y.append(line1.split()[0])    # [1] column 1 
         #y.append()
         
 Mat_Y = np.array(y, dtype=np.float64)
@@ -91,13 +91,10 @@ V2 = Mat_M[2]/np.cos(np.radians(P2))  # e2/cosP2
 V3 = Mat_M[4]/np.cos(np.radians(P3))   # e3/cosP3
 V4 = Mat_M[6]/np.cos(np.radians(P4))   # e4/cosP4
 
-print("V1=", V1,"P1=", P1)
-print("V2=", V2, "P2=", P2)
-print("V3=", V3, "P3=", P3)
-print("V4=", V4, "P4=", P4)
-
-
-
+print("V1=", V1)
+print("V2=", V2)
+print("V3=", V3)
+print("V4=", V4)
 
 print("Mat_M[0] , P1, V1 =" , Mat_M[0] , P1, V1)
 

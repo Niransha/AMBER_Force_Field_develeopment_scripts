@@ -1,4 +1,4 @@
-#!/bin/bash
+k#!/bin/bash
 
 file1=$1
 
@@ -7,7 +7,7 @@ file1=$1
 #echo " end of scripts/modify_RCSB_pdb.sh "
 
 echo "begin scripts/resname_modify_duplex_rna.pl " 
-perl ../scripts/resname_modify_duplex_rna.pl $file1  #  input is NAME.pdb out is NAME.new.pdb    
+perl ../scripts/create_newRESNAMEs.pl $file1  #  input is NAME.pdb out is NAME.new.pdb    
 echo " END scripts/resname_modify_duplex_rna.pl  "
 
 echo "begin ../scripts/xleap.new.water.in  "

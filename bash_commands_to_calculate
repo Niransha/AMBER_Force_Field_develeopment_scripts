@@ -1,0 +1,15 @@
+#check for loops conditions
+
+awk '{ for(f=2; f<=2; f++) { if ($f >= 360) $f=($f-360); } print env_var, $1, $2, $3 }' data_2d.dat
+
+awk '{ for(f=3; f<=3; f++) { if ($f < 0) $f=($f-(-1200755.260391)); } print env_var, $1, $2, $3 }' data.dat > data_norm.dat
+
+awk '{ for(f=3; f<=3; f++) { if ($f < 0) $f=($f+1200755.260391); } print env_var, $1, $2, $3 }' data.dat
+
+
+awk '{ for(f=2; f<=2; f++) { if ($f > 360) $f=($f-360); } print env_var, $1, $2, $3 }' data_2d.dat
+
+
+awk '{ for(f=3; f<=NF; f++) { if ($f < 0) $f=($f+360); } print env_var, $3, $4, $5, $6, $7, $8, $9}' data.dat
+
+https://stackoverflow.com/questions/53938256/how-to-modify-columns-contents-in-a-protein-pdb-file-by-keys-and-values-stored-i

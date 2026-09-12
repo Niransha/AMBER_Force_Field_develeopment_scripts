@@ -6,72 +6,76 @@
 # be adjusted after AM1 optimization step.
 #
 $initxyz = "opt.xyz";
-$prmtop  = "../../../prmtop.zeroed.new";
+$prmtop  = "../../prmtop.zeroed.new";
 #
 # Create sample.pdb file
 #
-system("ambpdb -aatm -p $prmtop -c $initxyz > sample.pdb");   ## create sample.pdb
+system("ambpdb -aatm -p $prmtop -c $initxyz > sample.pdb");   # creating pdb file from prmtom.zeroed.new and opt.xyz 
 #
 # Open .pdb file to store necessary data for RST file
 #
-$count = -1;
-open(F2O, "sample.pdb") || die "cannot open sample.pdb: $!";
+$count = -1;                              #count -1
+open(F2O, "sample.pdb") || die "cannot open sample.pdb: $!";    # open pdb or die
 while(<F2O>){
-  if(! /^ATOM/){next};
-  chomp($_);
-  s/^\s+//g;
-  $count++;
-  @tmp = split(/\s+/, $_);
-  $atomid[$count]   = $tmp[1];
-  $atomname[$count] = $tmp[2];
-  $resname[$count]  = $tmp[3];
+  if(! /^ATOM/){next};                  # begin with ATOM 
+  chomp($_);				#remove new lines				
+  s/^\s+//g;					#slpit by spaces
+  $count++;                                 # count by line
+  @tmp = split(/\s+/, $_);                   #split by lines
+  $atomid[$count]   = $tmp[1];              # atome ID to temp1     
+  $atomname[$count] = $tmp[2];              # atom name	
+  $resname[$count]  = $tmp[3];               # resname 
 #  $resname[$count]  =~ s/[R,3,5]//g;
-  $resid[$count]    = $tmp[4];
+  $resid[$count]    = $tmp[4];              #resID to temp 
 #  $x[$count]        = $tmp[5];
 #  $y[$count]        = $tmp[6];
 #  $z[$count]        = $tmp[7];
-  $atid{"$atomname[$count]"}{"$resid[$count]"} = $atomid[$count];
-##  @tmp1 = split(//, $atomname[$count]);
- ## $element[$count]  = $tmp1[0];	# First character of the name is the element type.
+  $atid{"$atomname[$count]"}{"$resid[$count]"} = $atomid[$count];      ##### hashes atid {H5T with resid 1 or 2 } = gives 1 2 3 4 5 6 7 atomID  
+  @tmp1 = split(//, $atomname[$count]);                                   # split one by one H5T to  H 5 T
+  $element[$count]  = $tmp1[0];	# First character of the name is the element type.                  #store H in tmp1[0] array
 }
-
 close(F2O) || die "cannot close sample.pdb: $!";
 #
-check_dihedrals("$initxyz");
+check_dihedrals("$initxyz");   
 #
 # Constant torsions used...
 #
-$h5t_o5s_c5s_c4s  = 180;
+$h5t_o5s_c5s_c4s  = 180;                ## beta
 $o5s_c5s_c4s_c3s  = 50; 	# terminal gamma
 $c5s_c4s_c3s_o3s  = 82;		# delta
 $c1s_c2s_o2s_ho2s = 80.30;	# -OH orientation
-#$epsilon = "";
-#$zeta    = "";
-#$alfa    = ""; 
-#$beta    = "";
-#$gamma   = "";
-$c4s_c3s_o3s_h3t  = 180;
-$chi              = 220;
-$nonplanar        = 180;
-$o4s_c1s_c2s_c3s  = -26.10;
+#$epsilon = "";           ## c4-c3-03-P
+#$zeta    = "";              ## c3-o3-p-o5
+#$alfa    = "";  	## o3-p-o5-c5
+#$beta    = "";          ## p-o5-c5-c4
+#$gamma   = "";          ## o5-c5-c4-c3  
+$c4s_c3s_o3s_h3t  = 180;  ##epsilon
+$chi              = 220;  ## 
+$nonplanar        = 180;   ############# 
+$o4s_c1s_c2s_c3s  = -26.10;  # 
 #
-$pwd = $ENV{"PWD"};
-@tmp = split(/\//, $pwd);
-for($i=0; $i<=$#tmp; $i++){
-  if($tmp[$i] =~ /dimer_/){
-    $dimer_type = $tmp[$i];
-    $dimer_type =~ s/dimer_//g;
-  } elsif($tmp[$i] =~ /rotation/){
-    $tor_case = $tmp[$i];
-    $tor_case =~ s/rotation_//g;
+$pwd = $ENV{"PWD"};           # get path
+@tmp = split(/\//, $pwd);     ## split path by / into tmp array \/ here \ to avoid confuse with system /
+for($i=0; $i<=$#tmp; $i++){         ## until last index $# get index of last element tmp
+  if($tmp[$i] =~ /dimer_/){               ## =~ if matches with dimer_  if ture
+    $dimer_type = $tmp[$i];			##  
+    $dimer_type =~ s/dimer_//g;             # replace dimer_ with / ############
+  } elsif($tmp[$i] =~ /rotation/){              ## =~ locate rotation , true ? 
+    $tor_case = $tmp[$i];                      ##
+    $tor_case =~ s/rotation_//g;                  ## replace rotation_ with / ############
   }
 }
 #print "$dimer_type\n";
-@res = split(//, $dimer_type);
+@res = split(//, $dimer_type);              ## AA split by A A 
 #
+
+#### RST file ####
+
 $RST_FILE = "RST";
+
+
 open(FILE2WRITE,">$RST_FILE") || die "cannot open $RST_FILE: $!";
-print FILE2WRITE "# 1 $resname[0] 5'END: (1 $resname[0] H5T)-(1 $resname[0] O5')-(1 $resname[0] C5')-(1 $resname[0] C4') $h5t_o5s_c5s_c4s\n";
+print FILE2WRITE "# 1 $resname[0] 5'END: (1 $resname[0] H5T)-(1 $resname[0] O5')-(1 $resname[0] C5')-(1 $resname[0] C4') $h5t_o5s_c5s_c4s\n";      ##
 print FILE2WRITE " &rst           iat = ".$atid{"H5T"}{"1"}.",".$atid{"O5'"}{"1"}.",".$atid{"C5'"}{"1"}.",".$atid{"C4'"}{"1"}.",\n";
 print FILE2WRITE "                r1 = ".($h5t_o5s_c5s_c4s-180).", r2 = ".($h5t_o5s_c5s_c4s).", r3 = ".($h5t_o5s_c5s_c4s).", r4 = ".($h5t_o5s_c5s_c4s+180).",\n";
 print FILE2WRITE "                rk2 =   100000.0, rk3 =   100000.0, ialtd=0,               &end\n\n";
@@ -89,7 +93,7 @@ print FILE2WRITE " &rst           iat = ".$atid{"C1'"}{"1"}.",".$atid{"C2'"}{"1"
 print FILE2WRITE "                r1 = ".($c1s_c2s_o2s_ho2s-180).", r2 = ".($c1s_c2s_o2s_ho2s).", r3 = ".($c1s_c2s_o2s_ho2s).", r4 = ".($c1s_c2s_o2s_ho2s+180).", &end\n\n";
 print FILE2WRITE "# 2 $resname[$count] DELTA-1: (2 $resname[$count] C5')-(2 $resname[$count] C4')-(2 $resname[$count] C3')-(2 $resname[$count] O3') $c5s_c4s_c3s_o3s\n";
 print FILE2WRITE " &rst           iat = ".$atid{"C5'"}{"2"}.",".$atid{"C4'"}{"2"}.",".$atid{"C3'"}{"2"}.",".$atid{"O3'"}{"2"}.",\n";
-print FILE2WRITE "                r1 = ".($c5s_c4s_c3s_o3s-180).", r2 = ".($c5s_c4s_c3s_o3s).", r3 = ".($c5s_c4s_c3s_o3s).", r4 = ".($c5s_c4s_c3s_o3s+180).", &end\n\n";
+print FILE2WRITE "                r1 = ".($o5s_c5s_c4s_c3s-180).", r2 = ".($o5s_c5s_c4s_c3s).", r3 = ".($o5s_c5s_c4s_c3s).", r4 = ".($o5s_c5s_c4s_c3s+180).", &end\n\n";
 print FILE2WRITE "# 2 $resname[$count] DELTA-2: (2 $resname[$count] O4')-(2 $resname[$count] C1')-(2 $resname[$count] C2')-(2 $resname[$count] C3') $o4s_c1s_c2s_c3s\n";
 print FILE2WRITE " &rst           iat = ".$atid{"O4'"}{"2"}.",".$atid{"C1'"}{"2"}.",".$atid{"C2'"}{"2"}.",".$atid{"C3'"}{"2"}.",\n";
 print FILE2WRITE "                r1 = ".($o4s_c1s_c2s_c3s-180).", r2 = ".($o4s_c1s_c2s_c3s).", r3 = ".($o4s_c1s_c2s_c3s).", r4 = ".($o4s_c1s_c2s_c3s+180).", &end\n\n";
@@ -127,11 +131,11 @@ if (($res[0] eq "C") || ($res[0] eq "U")){
   print FILE2WRITE "                r1 = ".($chi-180).", r2 = ".($chi).", r3 = ".($chi).", r4 = ".($chi+180).", &end\n\n";
 }
 if (($res[1] eq "C") || ($res[1] eq "U")){
-  print FILE2WRITE "# CHI 2: (2 $resname[$count] O4')-(2 $resname[$count] C1')-(2 $resname[$count] N1)-(2 $resname[$count] C2) $chi\n";
+  print FILE2WRITE "# CHI 2: (2 $resname[0] O4')-(2 $resname[0] C1')-(2 $resname[0] N1)-(2 $resname[0] C2) $chi\n";
   print FILE2WRITE " &rst           iat = ".$atid{"O4'"}{"2"}.",".$atid{"C1'"}{"2"}.",".$atid{"N1"}{"2"}.",".$atid{"C2"}{"2"}.",\n";
   print FILE2WRITE "                r1 = ".($chi-180).", r2 = ".($chi).", r3 = ".($chi).", r4 = ".($chi+180).", &end\n\n";
 } elsif(($res[1] eq "A") || ($res[1] eq "G")){
-  print FILE2WRITE "# CHI 2: (2 $resname[$count] O4')-(2 $resname[$count] C1')-(2 $resname[$count] N9)-(2 $resname[$count] C4) $chi\n";
+  print FILE2WRITE "# CHI 2: (2 $resname[0] O4')-(2 $resname[0] C1')-(2 $resname[0] N9)-(2 $resname[0] C4) $chi\n";
   print FILE2WRITE " &rst           iat = ".$atid{"O4'"}{"2"}.",".$atid{"C1'"}{"2"}.",".$atid{"N9"}{"2"}.",".$atid{"C4"}{"2"}.",\n";
   print FILE2WRITE "                r1 = ".($chi-180).", r2 = ".($chi).", r3 = ".($chi).", r4 = ".($chi+180).", &end\n\n";
 }
@@ -164,9 +168,6 @@ if ($res[1] eq "C") {
   print FILE2WRITE " &rst           iat = ".$atid{"C2"}{"2"}.",".$atid{"H21"}{"2"}.",".$atid{"N2"}{"2"}.",".$atid{"H22"}{"2"}.",\n";
   print FILE2WRITE "                r1 = ".($nonplanar-180).", r2 = ".($nonplanar).", r3 = ".($nonplanar).", r4 = ".($nonplanar+180).", &end\n\n";
 }
-
-#die;
-
 #
 # Create runmin
 #
@@ -203,7 +204,7 @@ print FILE2WRITE "exit(0)\n";
 print FILE2WRITE "echo \"  \${0}:  Program error\"\n";
 print FILE2WRITE "exit(1)\n";
 close(FILE2WRITE) || die "cannot close runmin: $!";
-system("chmod a+rwx ./runmin");
+system("chmod a+rwx ./runmin");             ## run 
 system("./runmin");
 ############################## done with runmin ##################################
 
@@ -242,3 +243,5 @@ sub check_dihedrals {
   if($beta    < 0){$beta    += 360};
   if($gamma   < 0){$gamma   += 360};
 }
+
+################  

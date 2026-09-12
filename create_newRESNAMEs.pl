@@ -8,12 +8,11 @@ $filenew = $tmp[0].".new.".$tmp[1];
 #print "$file\n";
 $seq = `cat $file | grep ATOM | awk '{print \$4" "\$5}' | uniq | awk '{l=l \$1}END{print l}'`;
 chomp($seq);
-
 @res = split(//, $seq); 
-
-
+#print "$seq\n";
+#print "$res[1]\n";
 for($i=0; $i <= $#res; $i++){
-  if($i == 0){  			
+  if($i == 0){
     $resnew[$i] = "5$res[$i]$res[$i+1]";
   } elsif($i == $#res){
     $resnew[$i] = "$res[$i-1]$res[$i]3";
@@ -40,17 +39,11 @@ while (<F2R>){
     chomp($_);
     @tmp = split(/\s+/, $_);
     print F2W sprintf("%-6s%5d %4s %3s  %4d    %8.3f%8.3f%8.3f\n", $tmp[0],$tmp[1],$tmp[2],$resnew[$tmp[4]-1],$tmp[4], $tmp[5], $tmp[6], $tmp[7]);
-#   print F2W sprintf("%-6s%5d %4s %3s  %4d    %8.3f%8.3f%8.3f\n",  ATOM ],serial ,atname , $tmp[4] - resid
- 
-  
+                                                                                                  #   ^ this tmp related to l/2 so it wont relate when no symmetry
   }
-  
 }
 close(F2R) || die "cannot close $file: $!";
 #
 close(F2W) || die "cannot close $filenew: $!";
-
-
-
 
 

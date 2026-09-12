@@ -1,0 +1,6 @@
+#vmd trajectory script using pdb
+ls -l */min.pdb | awk '{split($9,a,"/"); split(a[1],b,"_"); print b[2]"\t"$9}'  | sort -nk1,1  | awk '{s++; print "MODEL "s; system("cat "$2" | grep ATOM"); print "ENDMDL"}'  > tmp.pdb
+#paramenter curve
+cat test.parameters | awk '{for(i=1; i<=NF-1; i+=2){k=(i+1)/2; V[k]=$i}; for(i=2; i<=NF; i+=2){k=i/2; P[k]=$i}; pi=3.14; for(i=0; i<=360; i++){ene=0; for(j=1; j<=4; j++){ene+=V[j]*(1+cos((j*i)*pi/180 - P[j]*pi/180))}; print i"\t"ene}}'  > tmp1.original
+#rows to column
+cat tmp2 | awk '{for(i=1; i<=NF-1; i++){l=l sprintf("%5d%5d", "1", $i)}; print NF-1" "$NF; print l}'

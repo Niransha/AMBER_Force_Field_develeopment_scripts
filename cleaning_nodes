@@ -1,0 +1,57 @@
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd001 -u bash -i
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd002 -u bash -i
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd003 -u bash -i
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd004 -u bash -i
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd005 -u bash -i
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd006 -u bash -i
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd007 -u bash -i
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd008 -u bash -i
+
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd001 -u bash -i
+ssh nodeamd001
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+
+srun --pty -n 5 -p longq7-rna --nodelist=nodeamd001 -u bash -i
+ssh nodeamd001
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+srun --pty -n 1 -p longq7-rna --nodelist=nodeamd002 -u bash -i
+ssh nodeamd002
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+srun --pty -n 1 -p longq7-rna --nodelist=nodeamd003 -u bash -i
+ssh nodeamd003
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+srun --pty -n 1 -p longq7-rna --nodelist=nodeamd004 -u bash -i
+ssh nodeamd004
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+srun --pty -n 1 -p longq7-rna --nodelist=nodeamd005 -u bash -i
+ssh nodeamd005
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+srun --pty -n 1 -p longq7-rna --nodelist=nodeamd006 -u bash -i
+ssh nodeamd006
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+srun --pty -n 1 -p longq7-rna --nodelist=nodeamd007 -u bash -i
+ssh nodeamd007
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+
+srun --pty -n 1 -p longq7-rna --nodelist=nodeamd008 -u bash -i
+ssh nodeamd008
+rm -dvfr /tmp/nkumarachchi2019/
+exit
+
+

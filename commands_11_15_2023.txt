@@ -1,0 +1,50 @@
+jb | grep jbjb | awk '{print "scancel " $1}' > jobs.cancel && bash jobs.cancel
+
+srun --pty -N 1 -n 10 --exclusive -p longq7-rna -u bash -i
+
+for i in {50..76}; do    ls -l md_$i.mdcrd; done
+
+#infinity
+while :; do jb | grep testhGAA | awk '{print "scancel " $1}' > jobs.cancel && bash jobs.cancel; done
+
+#check Tempatarures 
+grep "NSTEP = 10000000" md_*.out | awk '{if ($10>100) print $0 }' | awk '{split($1,a,"."); split(a[1],b,"_"); print b[2]"\t" $10}' | sort -nk1,1
+
+#jb work paths
+jb | grep clus_con | awk '{system("scontrol show job " $1)}' | grep WorkDir
+
+exclude these A100 nodes
+#SBATCH --exclude=nodeamd[039-041],nodegpu[002-003]
+
+#rsync
+
+nohup rsync -chavzP --stats /mnt/rna/home/project_tetraloop_mbondi3/* /mnt/rna/home/nkumarachchi2019/scratch/project_tetraloop_mbondi3/ > nohup3.out &
+
+#check progress of submitted md_1.outs 
+
+jb | grep R |  awk '{ print("ssh "$8" \"tail -n 5 /tmp/nkumarachchi2019/"$1"/min.out\"\n"); system("scontrol show job "$1" | grep WorkDir \n"); system("ssh "$8" \"tail -n 8 /tmp/nkumarachchi2019/"$1"/min.out\"")}' 
+
+
+
+check folders are working and get top folder in with NOT
+
+jb | awk '{system("scontrol show job "$1)}' | grep WorkDir | awk '{split($1,a,"/"); printf("-not -name \""a[8]"\" ")}'
+
+
+### check sim correct ##
+
+printf "$( ls -ltr md_*.mdcrd | awk '{print$5}' | uniq)   $(ls -ltr md_*.rst | awk '{print$5}' | uniq)    $(ls -ltr md_*.out | awk '{print$5}' | uniq) \n"
+
+
+
+
+awk '{if($2>=2.5 && $2<=3.0) printf($1",")}' rmsd1.dat 
+
+source /mnt/rna/home/programs/amber22/amber.sh
+
+
+conda activate intelpy-env
+
+python -m ipykernel install --user --name intelpy-env --display-name "intelpy"
+
+

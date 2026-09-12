@@ -1,0 +1,2 @@
+2023/10/20 15:40:15 NOTICE: Config file "/home/nkumarachchi2019/.config/rclone/rclone.conf" not found - using defaults
+2023/10/20 15:40:15 Failed to create file system for "FauOneDrive:RES_SCRIPTS/": didn't find section in config file

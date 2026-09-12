@@ -1,0 +1,28 @@
+#!/bin/csh -f
+echo " "
+echo "  Amber 9   RESP"
+echo " "
+echo RESP stage 1:
+resp -O \
+		-i respfit.1.in \
+		-o total_1st.out \
+		-p total_1st.pch \
+		-q init.charge \
+		-e esp.dat \
+		-t total_1st.chg		|| goto error
+
+echo RESP stage 2:
+resp -O \
+		-i respfit.2.in \
+		-o total_2nd.out \
+		-p total_2nd.pch \
+		-e esp.dat \
+		-t total_2nd.chg \
+		-q total_1st.chg		|| goto error
+
+echo No errors detected
+exit(0)
+
+error:
+echo Error: check .out and try again
+exit(1)
