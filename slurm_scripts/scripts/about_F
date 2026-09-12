@@ -1,0 +1,36 @@
+#!/bin/bash
+
+see all_in_one_RCSB_pbs.sh (this incluce several scripts ) # soursing below scripts and at the end solvation
+
+modify_RCSB_pdbs_and_change_resnames.sh
+#this will make any RCSB pdb to amber format then to NAB format see in side
+
+resname_modify_duplex_rna.pl # correct resname for doublke helix
+
+xleap.new.water.in # crate parmtop and inpcrd using new 2d optimized library to mak
+
+create_correct_prmtop.pl      #	prmtop to prmtop.new
+
+amber_commands.sh # create list for posisional strain # but this will not use instead , also this will make pdb with water ambpdb using inpcrd and prmtop.new
+
+these terms have been used in run_min.sh and run_eq.sh restraint_wt = 10.0, restraintmask = " ! @H= & ! :WAT,Na+,Cl-"
+
+xleap.new.water.in 
+xleap.new.water.in_for_nab_pdbs # same file , use to change the names
+
+#simulation files
+atlas.gpu_run_min_eq_prodction.sh # min eq and production sbatch this
+production_run.pl 
+run_eq.sh
+run_min.sh
+
+
+
+all_in_one_NAB_pdbs.sh                 modify_RCSB_pdbs_and_change_resnames.sh  .#resname_modify_duplex_rna.pl           xleap.new.water.in
+resname_modify_duplex_rna.pl             .#xleap.new.water.in_for_nab_pdbs
+all_in_one_RCSB_pbs.sh                   create_correct_prmtop.pl                 .#notes-codes                            .#RNA_resname_change.pl                  xleap.new.water.in_for_nab_pdbs
+.#all_in_one.sh                          create_newRESNAMEs.pl                    notes-codes                              run_eq.sh                                Xmodify_RCSB_pdb.sh
+amber_commands.sh                        DEADJOE                                  .#pdb_colunm_checker.sh                  run_min.sh                               
+atlas.gpu_run_min_eq_prodction.sh        folder_go_in.sh                          pdb_colunm_checker.sh                    seq.sh                                   
+#atlas.run.sh                           label_all.tcl                            production_run.pl                        vmd_render_rna_cluster.tcl               
+

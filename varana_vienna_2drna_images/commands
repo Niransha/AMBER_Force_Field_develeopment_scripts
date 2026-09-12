@@ -1,0 +1,7 @@
+java -cp VARNAv3-93-src.jar fr.orsay.lri.varna.applications.VARNAcmd -i dssr-2ndstrs.bpseq -o out.jpeg
+
+rep -v Old  mapped_cluster_ids.txt | grep -v 99999 | awk '{print("cp cluster_"$1"/avg.pdb mapped_avg_pdbs/"$2".pdb")}'
+
+
+
+

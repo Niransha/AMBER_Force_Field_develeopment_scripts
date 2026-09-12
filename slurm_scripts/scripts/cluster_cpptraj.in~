@@ -1,0 +1,23 @@
+parm ../prmtop.new
+
+for i=1;i<51;i++
+   trajin ../md_$i.mdcrd 0 last
+done
+
+autoimage
+strip :WAT,Cl-,WAT
+rms fit :1-4
+
+strip :Na+,Cl-,WAT
+cluster c1 \
+ kmeans clusters 10 randompoint maxit 500 \
+ rms !@H=&!:WAT,Na+,Cl- \
+ sieve 10 random \
+ out cnumvtime.dat \
+ summary summary.dat \
+ info info.dat \
+ cpopvtime cpopvtime.agr normframe \
+ repout rep repfmt pdb \
+ singlerepout singlerep.nc singlerepfmt netcdf \
+ avgout avg avgfmt pdb
+run

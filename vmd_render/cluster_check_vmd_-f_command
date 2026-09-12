@@ -1,0 +1,2 @@
+cat clus_pop_precentages.dat | grep -v tot | awk '{split($1,a,"_"); print a[2] }' | \
+ awk '{printf(" -f cluster_"$1"/avg.pdb")}END{print(" -e ~/scripts/vmd_render/this_vmd_ren_looped_20_lines_AND_newRebbons_backbone_remove_wat_no_snap.tcl")}'

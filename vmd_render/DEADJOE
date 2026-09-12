@@ -1,0 +1,92 @@
+
+*** These modified files were found in JOE when it aborted on Thu Dec 17 22:22:40 2020
+*** JOE was aborted by UNIX signal 15
+
+*** File '(Unnamed)'
+$resname[1]
+$resname[$count]
+\n  
+ 
+ 
+prmtop
+./
+E_MM-MM_zero_refpoint_zero.txt
+RA5
+RA3
+
+*** File '(Unnamed)'
+E_QM-MM_zero_refpoint_zero.txt
+\n\n
+5AA
+AA3
+\n\n
+Torsion
+Iteration Nr
+Conv
+Iteration
+MP2
+
+*** File '(Unnamed)'
+hash.hash
+vmd_run_for_snap.sh
+snap_extract.tcl
+hash.hash
+info.dat
+info.dat
+cluster_analysis.in
+cluster_analysis.in
+cluster_analysis.in
+cpptraj.bash
+vmd_ren_rna_wat.tcl
+
+*** File '* Startup Log *'
+Processing '/etc/joe/joerc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/joerc
+
+*** These modified files were found in JOE when it aborted on Fri Dec 24 14:51:33 2021
+*** JOE was aborted because the terminal closed
+
+*** File '(Unnamed)'
+C  
+C  
+BB3
+~
+=~
+scripts3_2d
+0
+$gamma1_four_serial_list
+gamma1_four_index_list
+gamma1_four_index_list
+
+*** File '(Unnamed)'
+\nATOM
+A1088
+I2000
+\nATOM
+PSU
+MODEL
+MODEL
+MODEL
+model
+MODEL
+
+*** File '(Unnamed)'
+bash_2file_splitter.sh
+frames_out.tcl
+frames_out.tcl
+torsion_measure_and_dimer_out_V5.tcl
+torsion_measure_and_dimer_out_V5.tcl
+exit
+vmd_visualize.tcl
+333d-sf.cif
+mini_do.sh
+snap_for_rotate_pdb.tcl
+snap_for_rotate_pdb.tcl
+
+*** File '* Startup Log *'
+Processing '/etc/joe/joerc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/joerc

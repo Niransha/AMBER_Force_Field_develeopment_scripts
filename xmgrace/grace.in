@@ -1,0 +1,86 @@
+arrange (1,1,.15,0.6,0.6,ON,ON,ON)
+ FOCUS G0
+ READ NXY "../dimer_all_stems/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_hairpins/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_bulges/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_iloops/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_single-strands/outfiles/alpha_UC.dat"
+ READ NXY "../dimer_all_junctions/outfiles/alpha_UC.dat"
+ #range(0..10) with 101 bins of 0.1 each
+ HISTOGRAM (S0, MESH(0, 360, 361), OFF, ON)
+ HISTOGRAM (S1, MESH(0, 360, 361), OFF, ON)
+ HISTOGRAM (S2, MESH(0, 360, 361), OFF, ON)
+ HISTOGRAM (S3, MESH(0, 360, 361), OFF, ON)
+ HISTOGRAM (S4, MESH(0, 360, 361), OFF, ON)
+ HISTOGRAM (S5, MESH(0, 360, 361), OFF, ON)
+ # output histograms to files
+ WRITE G0.S6 FILE "temp1.dat"
+ WRITE G0.S7 FILE "temp2.dat"
+ WRITE G0.S8 FILE "temp3.dat"
+ WRITE G0.S9 FILE "temp4.dat"
+ WRITE G0.S10 FILE "temp5.dat"
+ WRITE G0.S11 FILE "temp6.dat"
+ # clear all data from program
+ KILL G0.S0
+ KILL G0.S1
+ KILL G0.S2
+ KILL G0.S3
+ KILL G0.S4
+ KILL G0.S5
+ KILL G0.S6
+ KILL G0.S7
+ KILL G0.S8
+ KILL G0.S9
+ KILL G0.S10
+ KILL G0.S11
+# reread data back in to get rid of formatting
+ READ NXY "temp1.dat"
+ READ NXY "temp2.dat"
+ READ NXY "temp3.dat"
+ READ NXY "temp4.dat"
+ READ NXY "temp5.dat"
+ READ NXY "temp6.dat"
+ #hides the NXY graph
+ S0  line color 1
+ S0  legend "stems"
+ S1  line color 2
+ S1  legend "hairpins"
+ S2  line color 3
+ S2  legend "bulges"
+ S3  line color 4
+ S3  legend "iloops"
+ S4  line color 5
+ S4  legend "sstrands"
+ S5  line color 6
+ S5  legend "junctions"
+ AUTOSCALE
+
+yaxis  label "Normalized Porbability"	
+yaxis  tick minor ticks 3
+yaxis  bar linewidth 2.0
+yaxis  tick major linewidth 2
+yaxis  tick minor linewidth 2
+
+xaxis  label "torsion (\c0\C)"	
+xaxis  tick major 60
+xaxis  tick minor ticks 3
+xaxis  bar linewidth 2.0
+xaxis  tick major linewidth 2
+xaxis  tick minor linewidth 2
+
+legend 1.05, 0.8
+legend box linewidth 2
+
+PRINT TO "fig.png"
+HARDCOPY DEVICE "PNG"
+PAGE SIZE 2560, 2048
+#PAGE SIZE 800, 600
+DEVICE "PNG" FONT ANTIALIASING on
+DEVICE "PNG" OP "transparent:off"
+DEVICE "PNG" OP "compression:9"
+PRINT
+
+
+
+
+

@@ -1,0 +1,62 @@
+source /home/nkumarachchi2019/dimeric_force_field/all_seqs/leaprc.rna.ff99
+#source leaprc.water.tip3p
+addAtomTypes {
+  { "5A" "C" "sp3" }
+  { "5G" "C" "sp3" }
+  { "5Q" "C" "sp3" }
+  { "5U" "C" "sp3" }
+  { "AA" "C" "sp3" }
+  { "AC" "C" "sp3" }
+  { "AG" "C" "sp3" }
+  { "AU" "C" "sp3" }
+  { "GA" "C" "sp3" }
+  { "GC" "C" "sp3" }
+  { "GG" "C" "sp3" }
+  { "GU" "C" "sp3" }
+  { "QA" "C" "sp3" }
+  { "QC" "C" "sp3" }
+  { "QG" "C" "sp3" }
+  { "QU" "C" "sp3" }
+  { "UA" "C" "sp3" }
+  { "UC" "C" "sp3" }
+  { "UG" "C" "sp3" }
+  { "UU" "C" "sp3" }
+  { "A3" "O" "sp3" }
+  { "aa" "O" "sp3" }
+  { "ac" "O" "sp3" }
+  { "ag" "O" "sp3" }
+  { "au" "O" "sp3" }
+  { "G3" "O" "sp3" }
+  { "ga" "O" "sp3" }
+  { "gc" "O" "sp3" }
+  { "gg" "O" "sp3" }
+  { "gu" "O" "sp3" }
+  { "Q3" "O" "sp3" }
+  { "qa" "O" "sp3" }
+  { "qc" "O" "sp3" }
+  { "qg" "O" "sp3" }
+  { "qu" "O" "sp3" }
+  { "U3" "O" "sp3" }
+  { "ua" "O" "sp3" }
+  { "uc" "O" "sp3" }
+  { "ug" "O" "sp3" }
+  { "uu" "O" "sp3" }
+  { "C1"  "C" "sp2" }
+  { "C2"  "C" "sp2" }
+  { "C3"  "C" "sp2" }
+  { "C4"  "C" "sp2" }
+}
+addPdbAtomMap {
+  { "H5'" "H5'1" } { "H5''" "H5'2" }
+  { "OP1" "O1P" }  { "OP2" "O2P" }
+  { "H2'" "H2'1" } { "HO2'" "HO'2" }
+  { "HO5'" "H5T" } { "HO3'" "H3T" }
+}
+loadoff         /home/nkumarachchi2019/dimeric_force_field/library_RNAff_chi_alfa_gamma_IY/RNA_dimeric_residues.lib
+loadamberparams /home/nkumarachchi2019/dimeric_force_field/library_RNAff_chi_alfa_gamma_IY/frcmod
+
+model = loadpdb model_new_residue.pdb
+#addions model Na+ 0
+#solvateoct model TIP3PBOX 12.0
+saveAmberParm model prmtop inpcrd
+quit
